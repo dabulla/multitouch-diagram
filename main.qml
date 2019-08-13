@@ -96,13 +96,14 @@ Window {
                 // and a shader will bend it around the circle
                 id: diagram
                 // use one pixel per bar
-                property int days: 365
-                width: days
+                // this is the performance bottleneck and could be doen by a shader
+                property int barsPerYear: 365/2
+                width: barsPerYear
                 height: 128
                 Repeater {
                     id: diagramRepeater
                     // repeat one bar for every day
-                    model: diagram.days
+                    model: diagram.barsPerYear
                     Rectangle {
                         id: diagramBar
 
