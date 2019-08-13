@@ -63,8 +63,29 @@ Window {
             width: 1
             height: centerCircle.radius
             transformOrigin: Item.Top
-            // tan(alpha) = d_y/d_x; calc angle from coordinates and convert radians to degrees
-            rotation: Math.atan2(centerPoint.y-point1.y, centerPoint.x-point1.x)/Math.PI*180
+            // tan(alpha) = d_y/d_x; calc angle from coordinates
+            property real angle1: Math.atan2(centerPoint.y-point1.y, centerPoint.x-point1.x)
+
+            //// calc angle of futhest away point ////
+//            property real angle2: Math.atan2(centerPoint.y-point2.y, centerPoint.x-point2.x)
+//            property real angle3: Math.atan2(centerPoint.y-point3.y, centerPoint.x-point3.x)
+
+//            function minArcDist(angle1, angle2) {
+//                return Math.min(Math.abs(angle1-angle2)%(Math.PI*2));
+//            }
+//            property real dist12: minArcDist(angle1, angle2)
+//            property real dist13: minArcDist(angle1, angle3)
+//            property real dist23: minArcDist(angle2, angle3)
+//            property real angle: dist12 < dist13 && dist12 < dist23 ? angle3 :
+//                                 dist13 < dist12 && dist13 < dist23 ? angle2 :
+//                                                                      angle1
+//            // this would fix the rotation to the furthest away point
+//            rotation: angle/Math.PI*180
+            //// end of futhest away point calculation ////
+
+            // convert radians to degrees and set rotation of this element
+            rotation: angle1/Math.PI*180
+
             Repeater {
                 id: monthRepeater
                 model: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sept", "Okt", "Nov", "Dez"]
